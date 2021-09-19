@@ -20,6 +20,7 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "webpacker", "~> 5.0"
 gem "devise"
 gem "activeadmin"
+gem "pundit"
 
 group :development, :test do
   gem "bullet"
