@@ -5,7 +5,7 @@ class Category < ApplicationRecord
   has_many :subcategories, class_name: 'Category', foreign_key: 'parent_id', dependent: :destroy
   belongs_to :parent_category, class_name: 'Category', optional: true
 
-  validates :name, uniqueness: { case_sensitive: false }
+  validates :name, uniqueness: { case_sensitive: false }, presence: true
   validate :parent_category_id_is_not_self, on: :update
 
   def parent_category_id_is_not_self
