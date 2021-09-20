@@ -21,6 +21,7 @@ gem "webpacker", "~> 5.0"
 gem "devise"
 gem "activeadmin"
 gem "pundit"
+gem "friendly_id", "~> 5.4.0"
 
 group :development, :test do
   gem "bullet"
