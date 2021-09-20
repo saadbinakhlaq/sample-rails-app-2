@@ -1,2 +1,2 @@
-class WelcomeController < ApplicationController  
+class WelcomeController < ApplicationController
 end
