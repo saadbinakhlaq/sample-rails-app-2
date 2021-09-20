@@ -44,9 +44,11 @@ ActiveRecord::Schema.define(version: 2021_09_19_094150) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.text "description", default: ""
+    t.bigint "parent_category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
+    t.index ["parent_category_id"], name: "index_categories_on_parent_category_id"
     t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
 
@@ -61,4 +63,5 @@ ActiveRecord::Schema.define(version: 2021_09_19_094150) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+  add_foreign_key "categories", "categories", column: "parent_category_id"
 end
