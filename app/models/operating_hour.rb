@@ -2,7 +2,7 @@ class OperatingHour < ApplicationRecord
   belongs_to :business
 
   validates :day_of_week, presence: true,
-    inclusion: { in: Date::DAYNAMES }
+    inclusion: {in: Date::DAYNAMES}
   validates :open, presence: true
   validates :close, presence: true
 
