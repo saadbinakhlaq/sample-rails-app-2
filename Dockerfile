@@ -42,7 +42,8 @@ RUN apk --no-cache add \
       # VIM is a handy editor for editing credentials
       vim \
       # Allows for mimemagic gem to be installed
-      shared-mime-info
+      shared-mime-info \
+      less
 
 # Install any extra dependencies via Aptfile - These are installed on Heroku
 # COPY Aptfile /usr/src/app/Aptfile

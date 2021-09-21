@@ -22,6 +22,7 @@ gem "devise"
 gem "activeadmin"
 gem "pundit"
 gem "friendly_id", "~> 5.4.0"
+gem "country_select", "~> 6.0"
 
 group :development, :test do
   gem "bullet"
