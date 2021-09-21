@@ -4,5 +4,6 @@ FactoryBot.define do
     city { "MyString" }
     zipcode { "MyString" }
     country { "MyString" }
+    association :addressable, factory: :business
   end
 end
