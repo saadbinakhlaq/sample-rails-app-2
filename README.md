@@ -72,5 +72,3 @@ Feel free to use these as a starting point for your own Ruby on Rails project!
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)
-
-Copyright (c) 2020-present, [Mike Rogers](https://mikerogers.io/)
