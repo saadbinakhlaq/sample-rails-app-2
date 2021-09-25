@@ -20,6 +20,8 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "webpacker", "~> 5.0"
 gem "devise"
 gem "activeadmin"
+gem "flattened_active_admin"
+gem "bourbon"
 gem "pundit"
 gem "friendly_id", "~> 5.4.0"
 gem "country_select", "~> 6.0"
