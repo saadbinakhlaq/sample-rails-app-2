@@ -9,19 +9,9 @@ ActiveAdmin.register Business do
     id_column
     column :name
     column :general_info
-    column :links
     column :categories do |business|
-      table_for business.categories.order("name ASC") do
-        column :name
-      end
-    end
-
-    column :address do |business|
-      table_for business.address do
-        column :address_line_1
-        column :city
-        column :zipcode
-        column :country
+      business.categories.order(name: :asc) do
+        link_to category.name, [:admin, category]
       end
     end
     actions
@@ -31,19 +21,13 @@ ActiveAdmin.register Business do
     attributes_table do
       row :name
       row :general_info
-      row :links
       table_for business.categories.order("name ASC") do
         column "Categories" do |category|
           link_to category.name, [:admin, category]
         end
       end
-      panel "Address" do
-        table_for business.address do
-          column :address_line_1
-          column :city
-          column :zipcode
-          column :country
-        end
+      row "links" do
+        resource.links
       end
     end
   end
@@ -58,8 +42,9 @@ ActiveAdmin.register Business do
   end
 
   sidebar "Operating hours", only: :show do
-    attributes_table_for business.operating_hours do
-      row :openning_timing
+    resource.operating_hours.each do |oh|
+      oh = OperatingHourPresenter.new(oh)
+      li oh.timings
     end
   end
 
