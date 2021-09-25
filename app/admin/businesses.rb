@@ -1,7 +1,7 @@
 ActiveAdmin.register Business do
   permit_params :name, :general_info, :links,
     address_attributes: [:id, :address_line_1, :city, :zipcode, :country],
-    operating_hours_attributes: [:id, :day_of_week, :open, :close],
+    operating_hours_attributes: [:id, :day_of_week, :opening_timing, :closing_timing],
     category_ids: []
 
   index do
@@ -48,6 +48,21 @@ ActiveAdmin.register Business do
     end
   end
 
+  sidebar "Address", only: :show do
+    attributes_table_for business.address do
+      row :address_line_1
+      row :city
+      row :country
+      row :zipcode
+    end
+  end
+
+  sidebar "Operating hours", only: :show do
+    attributes_table_for business.operating_hours do
+      row :openning_timing
+    end
+  end
+
   form do |f|
     f.inputs "Details" do
       f.input :name
@@ -70,8 +85,8 @@ ActiveAdmin.register Business do
     f.inputs "Operating Hours" do
       f.has_many :operating_hours do |oh|
         oh.input :day_of_week, as: :radio, collection: Date::DAYNAMES.each_with_index.map { |day, i| [day, i] }
-        oh.input :open, as: :time_picker
-        oh.input :close, as: :time_picker
+        oh.input :opening_timing, as: :time_picker
+        oh.input :closing_timing, as: :time_picker
       end
     end
     f.actions

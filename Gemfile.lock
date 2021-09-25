@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: a46a84145c33e9319c8ad1cc5c88ea2ccac525d5
+  branch: master
+  specs:
+    faker (2.19.0)
+      i18n (>= 1.6, < 2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -436,6 +444,7 @@ DEPENDENCIES
   devise
   dotenv-rails (~> 2.7)
   factory_bot_rails
+  faker!
   friendly_id (~> 5.4.0)
   image_processing (~> 1.12)
   letter_opener (~> 1.7)
