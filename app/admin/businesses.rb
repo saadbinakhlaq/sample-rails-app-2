@@ -10,11 +10,18 @@ ActiveAdmin.register Business do
     column :name
     column :general_info
     column :links
-    column :categories do |article|
-      table_for article.categories.order("name ASC") do
-        column do |category|
-          category.name
-        end
+    column :categories do |business|
+      table_for business.categories.order("name ASC") do
+        column :name
+      end
+    end
+
+    column :address do |business|
+      table_for business.address do
+        column :address_line_1
+        column :city
+        column :zipcode
+        column :country
       end
     end
     actions
@@ -30,6 +37,14 @@ ActiveAdmin.register Business do
           link_to category.name, [:admin, category]
         end
       end
+      panel "Address" do
+        table_for business.address do
+          column :address_line_1
+          column :city
+          column :zipcode
+          column :country
+        end
+      end
     end
   end
 
@@ -41,11 +56,13 @@ ActiveAdmin.register Business do
     f.inputs "Categories" do
       f.input :category_ids, as: :check_boxes, collection: Category.all, label: "Category"
     end
-    f.inputs "Contact Details", for: [:address, f.object.address] do |a|
-      a.input :address_line_1
-      a.input :city
-      a.input :zipcode
-      a.input :country
+    f.inputs "Contact Details" do
+      f.has_many :address do |a|
+        a.input :address_line_1
+        a.input :city
+        a.input :zipcode
+        a.input :country
+      end
     end
     f.inputs do
       f.input :links
