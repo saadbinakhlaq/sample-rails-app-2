@@ -400,82 +400,119 @@ def address_attributes
   }
 end
 
+def create_businesses
+  Business.create(
+    name: Faker::Company.name,
+    general_info: Faker::Company.description,
+    category_ids: [
+      restaurant_category.id,
+      restaurant_subcategories_ids.sample
+    ],
+    operating_hours_attributes: restaurant_operating_hours,
+    address_attributes: address_attributes
+  )
+end
+
+def create_categories
+  CATEGORIES.each do |main_category|
+    category = Category.create(name: main_category[:name])
+    main_category[:subcategories].each do |subcategory|
+      Category.create(name: subcategory[:name], parent_category: category)
+    end
+  end
+end
+
+restaurant_operating_hours = [
+  {
+    day_of_week: 0,
+    opening_timing: "12:00:00",
+    closing_timing: "22:00:00"
+  },
+  {
+    day_of_week: 1,
+    opening_timing: "12:00:00",
+    closing_timing: "00:00:00"
+  },
+  {
+    day_of_week: 2,
+    opening_timing: "12:00:00",
+    closing_timing: "22:00:00"
+  },
+  {
+    day_of_week: 3,
+    opening_timing: "12:00:00",
+    closing_timing: "22:00:00"
+  },
+  {
+    day_of_week: 4,
+    opening_timing: "12:00:00",
+    closing_timing: "00:00:00"
+  },
+  {
+    day_of_week: 5,
+    opening_timing: "10:00:00",
+    closing_timing: "00:00:00"
+  },
+  {
+    day_of_week: 6,
+    opening_timing: "10:00:00",
+    closing_timing: "00:00:00"
+  }
+]
+
+def create_restaurants(restaurant_category, restaurant_subcategories_ids, restaurant_operating_hours)
+  Business.create(
+    name: Faker::Restaurant.name,
+    general_info: Faker::Restaurant.description,
+    category_ids: [
+      restaurant_category.id,
+      restaurant_subcategories_ids.sample
+    ],
+    operating_hours_attributes: restaurant_operating_hours,
+    address_attributes: address_attributes
+  )
+end
+
+def create_review(account, business)
+  Review.create(
+    account: account,
+    business: business,
+    rating: [1, 2, 3, 4, 5].sample,
+    comment: Faker::Lorem.sentence(word_count: 30),
+    status: %w[pending published].sample
+  )
+end
+
+def create_account
+  password = 123456
+  User.create(
+    email: Faker::Internet.email,
+    password: password,
+    password_confirmation: password,
+    account_attributes: {name: "#{Faker::Name.first_name} #{Faker::Name.last_name}"}
+  )
+end
+
 namespace :dev do
   desc "Generates seed data for development"
   task seed_data: :environment do
-    CATEGORIES.each do |main_category|
-      category = Category.create(name: main_category[:name])
-      main_category[:subcategories].each do |subcategory|
-        Category.create(name: subcategory[:name], parent_category: category)
-      end
-    end
+    create_categories
     restaurant_category = Category.friendly.find("restaurants")
     restaurant_subcategories_ids = restaurant_category.subcategories.map(&:id)
-    restaurant_operating_hours = [
-      {
-        day_of_week: 0,
-        opening_timing: "12:00:00",
-        closing_timing: "22:00:00"
-      },
-      {
-        day_of_week: 1,
-        opening_timing: "12:00:00",
-        closing_timing: "00:00:00"
-      },
-      {
-        day_of_week: 2,
-        opening_timing: "12:00:00",
-        closing_timing: "22:00:00"
-      },
-      {
-        day_of_week: 3,
-        opening_timing: "12:00:00",
-        closing_timing: "22:00:00"
-      },
-      {
-        day_of_week: 4,
-        opening_timing: "12:00:00",
-        closing_timing: "00:00:00"
-      },
-      {
-        day_of_week: 5,
-        opening_timing: "10:00:00",
-        closing_timing: "00:00:00"
-      },
-      {
-        day_of_week: 6,
-        opening_timing: "10:00:00",
-        closing_timing: "00:00:00"
-      }
-    ]
-    def create_businesses
-      Business.create(
-        name: Faker::Company.name,
-        general_info: Faker::Company.description,
-        category_ids: [
-          restaurant_category.id,
-          restaurant_subcategories_ids.sample
-        ],
-        operating_hours_attributes: restaurant_operating_hours,
-        address_attributes: address_attributes
-      )
-    end
 
-    def create_restaurants(restaurant_category, restaurant_subcategories_ids, restaurant_operating_hours)
-      Business.create(
-        name: Faker::Restaurant.name,
-        general_info: Faker::Restaurant.description,
-        category_ids: [
-          restaurant_category.id,
-          restaurant_subcategories_ids.sample
-        ],
-        operating_hours_attributes: restaurant_operating_hours,
-        address_attributes: address_attributes
-      )
-    end
     Faker::Config.locale = "de"
     30.times do
       create_restaurants(restaurant_category, restaurant_subcategories_ids, restaurant_operating_hours)
+    end
+
+    50.times do
+      create_account
+    end
+
+    accounts = Account.all
+    businesses = Business.all
+    100.times do
+      create_review(accounts.sample, businesses.sample)
     end
   end
 end

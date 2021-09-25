@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_25_153046) do
+ActiveRecord::Schema.define(version: 2021_09_25_162603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,18 @@ ActiveRecord::Schema.define(version: 2021_09_25_153046) do
     t.index ["business_id"], name: "index_operating_hours_on_business_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "business_id", null: false
+    t.integer "rating", null: false
+    t.text "comment", null: false
+    t.text "status", default: "pending", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_reviews_on_account_id"
+    t.index ["business_id"], name: "index_reviews_on_business_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -136,4 +148,6 @@ ActiveRecord::Schema.define(version: 2021_09_25_153046) do
   add_foreign_key "categories", "categories", column: "parent_category_id"
   add_foreign_key "categorizations", "businesses"
   add_foreign_key "categorizations", "categories"
+  add_foreign_key "reviews", "accounts"
+  add_foreign_key "reviews", "businesses"
 end
