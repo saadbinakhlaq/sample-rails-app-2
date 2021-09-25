@@ -1,7 +1,7 @@
 ActiveAdmin.register Business do
   permit_params :name, :general_info, :links,
     address_attributes: [:id, :address_line_1, :city, :zipcode, :country],
-    operating_hours_attributes: [:id, :day_of_week, :open, :close],
+    operating_hours_attributes: [:id, :day_of_week, :opening_timing, :closing_timing],
     category_ids: []
 
   index do
@@ -9,19 +9,9 @@ ActiveAdmin.register Business do
     id_column
     column :name
     column :general_info
-    column :links
     column :categories do |business|
-      table_for business.categories.order("name ASC") do
-        column :name
-      end
-    end
-
-    column :address do |business|
-      table_for business.address do
-        column :address_line_1
-        column :city
-        column :zipcode
-        column :country
+      business.categories.order(name: :asc) do
+        link_to category.name, [:admin, category]
       end
     end
     actions
@@ -31,20 +21,30 @@ ActiveAdmin.register Business do
     attributes_table do
       row :name
       row :general_info
-      row :links
       table_for business.categories.order("name ASC") do
         column "Categories" do |category|
           link_to category.name, [:admin, category]
         end
       end
-      panel "Address" do
-        table_for business.address do
-          column :address_line_1
-          column :city
-          column :zipcode
-          column :country
-        end
+      row "links" do
+        resource.links
       end
+    end
+  end
+
+  sidebar "Address", only: :show do
+    attributes_table_for business.address do
+      row :address_line_1
+      row :city
+      row :country
+      row :zipcode
+    end
+  end
+
+  sidebar "Operating hours", only: :show do
+    resource.operating_hours.each do |oh|
+      oh = OperatingHourPresenter.new(oh)
+      li oh.timings
     end
   end
 
@@ -70,8 +70,8 @@ ActiveAdmin.register Business do
     f.inputs "Operating Hours" do
       f.has_many :operating_hours do |oh|
         oh.input :day_of_week, as: :radio, collection: Date::DAYNAMES.each_with_index.map { |day, i| [day, i] }
-        oh.input :open, as: :time_picker
-        oh.input :close, as: :time_picker
+        oh.input :opening_timing, as: :time_picker
+        oh.input :closing_timing, as: :time_picker
       end
     end
     f.actions
