@@ -31,3 +31,5 @@
 
 en:
   hello: "Hello world"
+  shared:
+    sign_in: "Sign In"

@@ -6,4 +6,6 @@ class Review < ApplicationRecord
     pending: "pending",
     published: "published"
   }
+
+  scope :published, -> { where(status: :published) }
 end

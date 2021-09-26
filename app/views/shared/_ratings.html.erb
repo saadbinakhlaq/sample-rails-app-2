@@ -1,0 +1,8 @@
+<div class="rating">
+  <% rating_count.times do %>
+    <i class="fas fa-star"></i>
+  <% end %>
+  <% if review_count > 0 %>
+    <span>(<%= review_count %>)</span>
+  <% end %>
+</div>

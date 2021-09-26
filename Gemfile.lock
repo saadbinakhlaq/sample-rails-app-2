@@ -95,6 +95,9 @@ GEM
     bindex (0.8.1)
     bootsnap (1.8.1)
       msgpack (~> 1.0)
+    bootstrap5-kaminari-views (0.0.1)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     bourbon (7.0.0)
       thor (~> 1.0)
     builder (3.2.4)
@@ -441,6 +444,7 @@ DEPENDENCIES
   barnes (~> 0.0.8)
   better_errors
   bootsnap (>= 1.4.4)
+  bootstrap5-kaminari-views
   bourbon
   bullet
   byebug
@@ -453,6 +457,7 @@ DEPENDENCIES
   flattened_active_admin
   friendly_id (~> 5.4.0)
   image_processing (~> 1.12)
+  kaminari
   letter_opener (~> 1.7)
   letter_opener_web (~> 1.4)
   listen (~> 3.3)
