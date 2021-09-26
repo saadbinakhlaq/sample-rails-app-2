@@ -14,15 +14,11 @@ class BusinessPresenter < SimpleDelegator
   def is_open?
     datetime = DateTime.current
     week_day = datetime.wday
-    datetime = datetime.strftime( "%H%M%S%N" )
+    datetime = datetime.strftime("%H%M%S%N")
     operating_hour = operating_hours.find_by(day_of_week: week_day)
-    opening_time = operating_hour.opening_timing.strftime( "%H%M%S%N" )
-    closing_time = operating_hour.closing_timing.strftime( "%H%M%S%N" )
-    if datetime >= opening_time && datetime <= closing_time
-      true
-    else
-      false
-    end
+    opening_time = operating_hour.opening_timing.strftime("%H%M%S%N")
+    closing_time = operating_hour.closing_timing.strftime("%H%M%S%N")
+    datetime >= opening_time && datetime <= closing_time
   end
 
   def full_address
