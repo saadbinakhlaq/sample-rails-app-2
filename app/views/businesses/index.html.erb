@@ -1,0 +1,25 @@
+<section class="d-md-flex justify-content-center">
+  <div class="business-card-list">
+    <% @businesses.each do |business| %>
+      <div class="business-card">
+      <% business_presenter = BusinessPresenter.new(business) %>
+        <a href="<%= business_path(business) %>">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title"><%= business_presenter.name %></h5>
+              <h6 class="card-subtitle mb-2 text-muted"><%= business_presenter.full_address%></h6>
+              <p class="card-test"><%= business_presenter.general_info_truncated %></p>
+              <%= render "shared/ratings",
+                  rating_count: business_presenter.published_review_rating,
+                  review_count: business_presenter.published_review_count
+              %>
+              <%= render "shared/open_now", is_open: business_presenter.is_open? %>
+            </div>
+          </div>
+        </a>
+      </div>
+    <% end %>
+    <%= paginate @businesses, theme: "bootstrap-5", pagination_class: "pagination-sm flex-wrap justify-content-center" %>
+  </div>
+</section>
+

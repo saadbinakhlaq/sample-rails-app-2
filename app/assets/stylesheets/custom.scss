@@ -1,0 +1,38 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+body {
+  font-family: Roboto;
+}
+
+$yellow: #ffd500;
+$mikado-yellow: #ffc300;
+$oxford-blue: #001d3d;
+
+.bg-yellow {
+  background-color: $yellow;
+}
+
+a {
+  color: $oxford-blue;
+  text-decoration: none;
+}
+
+.business-card {
+  a {
+    color: inherit;
+  }
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: $oxford-blue;
+}
+
+.btn-search, .btn-search:hover, .btn-search:focus, .btn-search:active, .btn-search:visited, .btn-search:focus-visible, .btn-search:disabled {
+  background-color: $yellow;
+  border-color: $yellow;
+}
+
+.btn-search:hover {
+  background-color: $yellow;
+  border-color: $mikado-yellow;
+}

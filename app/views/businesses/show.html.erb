@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="business-summary row mb-3">
+    <h3><%= @business.name %></h3>
+    <p><%= @business.full_address %></p>
+    <%= render "shared/ratings",
+        rating_count: @business.published_review_rating,
+        review_count: @business.published_review_count
+    %>
+    <%= render "shared/open_now", is_open: @business.is_open? %>
+  </div>
+  <div class="business-operating-hours row mb-5">
+    <h5>Operating Hours</h5>
+    <ul class="list-group">
+      <% @business.operating_hours.each do |oh| %>
+        <% oh = OperatingHourPresenter.new(oh) %>
+        <li class="list-group-item"><%=  oh.timings %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="business-general-info row mb-5">
+    <h5>General Information</h5>
+    <p><%= @business.general_info %></p>
+  </div>
+  <div class="business-reviews row">
+    <%= render "shared/reviews",
+        reviews: @reviews,
+        average_rating: @business.published_review_rating,
+        review_count: @business.published_review_count,
+        all_reviews: @all_reviews,
+        five_rating_count: @five_rating_count,
+        four_rating_count: @four_rating_count,
+        three_rating_count: @three_rating_count,
+        two_rating_count: @two_rating_count,
+        one_rating_count: @one_rating_count %>
+  </div>
+</div>

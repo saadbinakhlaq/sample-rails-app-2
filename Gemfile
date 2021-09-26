@@ -25,6 +25,8 @@ gem "bourbon"
 gem "pundit"
 gem "friendly_id", "~> 5.4.0"
 gem "country_select", "~> 6.0"
+gem "kaminari"
+gem "bootstrap5-kaminari-views"
 
 group :development, :test do
   gem "bullet"

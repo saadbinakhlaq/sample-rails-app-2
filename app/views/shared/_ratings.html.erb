@@ -1,0 +1,13 @@
+<div class="rating">
+  <% rating_int = rating_count.to_i %>
+  <% rating_decimal = rating_count - rating_count.to_i %>
+  <% rating_int.times do %>
+    <i class="fas fa-star"></i>
+  <% end %>
+  <% if rating_decimal > 0 %>
+    <i class="fas fa-star-half"></i>
+  <% end %>
+  <% if review_count > 0 %>
+    <span>(<%= review_count %>)</span>
+  <% end %>
+</div>
