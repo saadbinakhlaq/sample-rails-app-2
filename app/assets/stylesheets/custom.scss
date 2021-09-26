@@ -27,7 +27,7 @@ a {
   color: $oxford-blue;
 }
 
-.btn-search {
+.btn-search, .btn-search:hover, .btn-search:focus, .btn-search:active, .btn-search:visited, .btn-search:focus-visible, .btn-search:disabled {
   background-color: $yellow;
   border-color: $yellow;
 }
