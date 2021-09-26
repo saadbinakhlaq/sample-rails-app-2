@@ -10,7 +10,7 @@
               <h6 class="card-subtitle mb-2 text-muted"><%= business_presenter.full_address%></h6>
               <p class="card-test"><%= business_presenter.general_info_truncated %></p>
               <%= render "shared/ratings",
-                  rating_count: business_presenter.published_review_rating.to_i,
+                  rating_count: business_presenter.published_review_rating,
                   review_count: business_presenter.published_review_count
               %>
               <%= render "shared/open_now", is_open: business_presenter.is_open? %>

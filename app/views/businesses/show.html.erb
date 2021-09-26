@@ -1,47 +1,36 @@
 <div class="container">
-  <div class="business-summary row">
+  <div class="business-summary row mb-3">
     <h5><%= @business.name %></h5>
     <p><%= @business.full_address %></p>
     <%= render "shared/ratings",
-        rating_count: @business.published_review_rating.to_i,
+        rating_count: @business.published_review_rating,
         review_count: @business.published_review_count
     %>
     <%= render "shared/open_now", is_open: @business.is_open? %>
   </div>
-  <div class="business-contact-details row">
-    <p><%= @business.address.address_line_1%></>
-    <p><%= @business.address.city%></>
-    <p><%= @business.address.zipcode%></>
-  </div>
-  <div class="business-operating-hours row">
-    <ul>
+  <div class="business-operating-hours row mb-5">
+    <h5>Operating Hours</h5>
+    <ul class="list-group">
       <% @business.operating_hours.each do |oh| %>
         <% oh = OperatingHourPresenter.new(oh) %>
-        <li><%=  oh.timings %></li>
+        <li class="list-group-item"><%=  oh.timings %></li>
       <% end %>
     </ul>
   </div>
-  <div class="business-general-info row">
+  <div class="business-general-info row mb-5">
+    <h5>General Information</h5>
     <p><%= @business.general_info %></p>
   </div>
   <div class="business-reviews row">
-    <div>
-      <% @business.reviews.each do |review| %>
-        <div class="card mb-3">
-          <div class="row g-0">
-            <div class="col-md-4 p-3">
-              <p class="card-text"><small class="text-muted"><%= review.account.name %></small></p>
-              <p class="card-text"><small class="text-muted"><%= review.created_at %></small></p>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title"><%= render "shared/ratings", rating_count: review.rating, review_count: 0 %></h5>
-                <p class="card-text"><%= review.comment %></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    </div>
+    <%= render "shared/reviews",
+        reviews: @reviews,
+        average_rating: @business.published_review_rating,
+        review_count: @business.published_review_count,
+        all_reviews: @all_reviews,
+        five_rating_count: @five_rating_count,
+        four_rating_count: @four_rating_count,
+        three_rating_count: @three_rating_count,
+        two_rating_count: @two_rating_count,
+        one_rating_count: @one_rating_count %>
   </div>
 </div>
