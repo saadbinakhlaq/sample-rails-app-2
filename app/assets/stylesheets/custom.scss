@@ -1,15 +1,32 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
+@import "../node_modules/select2/src/scss/core";
+@import "../node_modules/select2-bootstrap-5-theme/src/include-all";
 
-body {
-  font-family: Roboto;
-}
-
+$charcoal: #264653;
 $yellow: #ffd500;
 $mikado-yellow: #ffc300;
 $oxford-blue: #001d3d;
+$persian-green: #2a9d8f;
+$sandy-brown: #f4a261;
+$burnt-sienna: #e76f51;
+$orange-yellow-capella: #e9c46a;
+
+body {
+  font-family: Roboto;
+  background-color: $charcoal;
+}
+
 
 .bg-yellow {
   background-color: $yellow;
+}
+
+.bg-persian-green {
+  background-color: $persian-green;
+}
+
+.fas {
+  color: $burnt-sienna;
 }
 
 a {
@@ -29,10 +46,6 @@ a {
 
 .btn-search, .btn-search:hover, .btn-search:focus, .btn-search:active, .btn-search:visited, .btn-search:focus-visible, .btn-search:disabled {
   background-color: $yellow;
-  border-color: $yellow;
-}
-
-.btn-search:hover {
-  background-color: $yellow;
-  border-color: $mikado-yellow;
+  border-color: $oxford-blue;
+  color: $oxford-blue;
 }

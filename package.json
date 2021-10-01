@@ -2,6 +2,7 @@
   "name": "app",
   "private": true,
   "dependencies": {
+    "@dashboardcode/bsmultiselect": "^1.1.18",
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@popperjs/core": "2.0.0-alpha.1",
     "@rails/actioncable": "^6.0.0",
@@ -9,6 +10,9 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.4.2",
     "bootstrap": "5.0.0-beta2",
+    "jquery": "^3.6.0",
+    "select2": "^4.1.0-rc.0",
+    "select2-bootstrap-5-theme": "^1.1.1",
     "turbolinks": "^5.2.0",
     "webpack": "^4.46.0"
   },

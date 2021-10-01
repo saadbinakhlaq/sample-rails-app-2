@@ -8,9 +8,14 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <%= favicon_link_tag asset_path('favicon-16x16.png'), rel: "icon", type: "image/png" %>
+    <%= favicon_link_tag asset_path('favicon-32x32.png'), rel: "icon", type: "image/png" %>
+    <%= favicon_link_tag asset_path('apple-touch-icon.png'), rel: "apple-touch-icon" %>
+    <%= favicon_link_tag asset_path('site.webmanifest'), rel: "manifest" %>
   </head>
 
-  <body class="d-flex flex-column min-vh-100">
+  <body class="d-flex flex-column min-vh-100 bg-gradient">
     <%= render "shared/navbar" %>
     <section class="p-5 mt-3">
       <div class="container main">

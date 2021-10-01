@@ -1,19 +1,19 @@
 
-<div class="text-center">
-  <h4>Discover Local Businesses</h4>
-  <%= form_tag businesses_path, method: :get, class: "mb-3" do |f| %>
-    <div class="d-md-flex justify-content-center">
-      <div class="col-auto m-3 shadow-lg rounded-3">
-        <label class="visually-hidden" for="what">What</label>
-        <%= text_field_tag :what, params[:what], class: "form-control p-4 border rounded-3", placeholder: "What", id: "what" %>
+<div class="text-center mt-5 justify-content-center">
+  <div class="row mb-3">
+    <h4 class="text-light">Discover Local Businesses</h4>
+  </div>
+  <div class="form-wrapper">
+    <%= form_tag businesses_path, method: :get, class: " d-flex row justify-content-center" do |f| %>
+      <div class="col-4">
+          <%= text_field_tag :what, params[:what], class: "border form-control p-3", placeholder: "What", id: "what" %>
       </div>
-      <div class="col-auto m-3 shadow-lg rounded-3">
-        <label class="visually-hidden" for="where">Where</label>
-        <%= text_field_tag :where, params[:where], class: "form-control p-4 border rounded-3", placeholder: "Where", id: "where" %>
+      <div class="col-4">
+        <%= text_field_tag :where, params[:where], class: "border form-control p-3", placeholder: "Where", id: "where" %>
       </div>
-      <div class="col-auto m-3 d-grid shadow-lg rounded-3">
-        <%= submit_tag "Search", class: "btn btn-primary p-4 btn-search rounded-3" %>
+      <div class="col-2">
+        <button type="submit" class="btn p-3" name="commit" value="search"><i class="fas fa-search"></i></button>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
