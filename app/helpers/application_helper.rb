@@ -4,7 +4,9 @@ module ApplicationHelper
     puts "final valye #{total_value}"
     value = (value_now.to_f / total_value) * 100
 
-    puts value
     value
+  end
+
+  def area_berlin_list
   end
 end

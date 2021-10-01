@@ -13,3 +13,15 @@ Turbolinks.start()
 ActiveStorage.start()
 import '../js/bootstrap_js_files.js'
 import "@fortawesome/fontawesome-free/css/all"
+global.$ = global.jQuery = jQuery;
+window.$ = window.jQuery = jQuery;
+import $ from 'jquery'
+import 'select2'
+import 'select2/dist/css/select2.css'
+window.addEventListener('DOMContentLoaded', () => {
+  $('.js-source-states').select2({
+    theme: "bootstrap-5",
+    width: "resolve",
+    placeholder: 'Select an option'
+  })
+})
